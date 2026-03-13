@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "skills": {
+    "self-improving": {
+      "version": "1.2.16",
+      "installedAt": 1773337308292
+    },
+    "proactivity": {
+      "version": "1.0.1",
+      "installedAt": 1773337436717
+    },
+    "agent-browser-clawdbot": {
+      "version": "0.1.0",
+      "installedAt": 1773337771442
+    },
+    "akshare-stock": {
+      "version": "1.0.1",
+      "installedAt": 1773350507625
+    },
+    "china-stock-analysis": {
+      "version": "1.0.0",
+      "installedAt": 1773350805837
+    }
+  }
+}

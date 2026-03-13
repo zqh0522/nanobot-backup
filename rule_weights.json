@@ -1,0 +1,11 @@
+{
+  "网络搜索失败时使用agent-browser": {
+    "text": "网络搜索失败时，使用agent-browser作为备用方案",
+    "weight": 0.52,
+    "last_used": "2026-03-14T00:53:58.646947",
+    "success_count": 2,
+    "failure_count": 0,
+    "created": "2026-03-14T00:53:46.318022",
+    "location": "domains/learning-adaptation.md"
+  }
+}
