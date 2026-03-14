@@ -94,6 +94,40 @@ node_modules/
 
 ### 敏感信息清理
 如果已提交敏感信息：
+
+**策略选择**：
+
+#### 1. 干净分支策略（推荐）
+适用于：有干净备份分支，或可以快速重建干净工作区
+
+```bash
+# 1. 删除包含敏感信息的文件
+git rm <file>
+
+# 2. 从已知干净分支恢复文件
+git checkout <clean-branch> -- <file>
+
+# 3. 提交并创建新分支
+git commit -m "清理敏感信息"
+git checkout -b clean-branch-<date>
+git push -u origin clean-branch-<date>
+
+# 4. 强制推送到主分支（替换历史）
+git push -f origin clean-branch-<date>:main
+```
+
+**优势**：
+- 避免 `git filter-branch` 的工作区文件丢失风险
+- 操作简单，易于验证
+- 保留完整历史记录（通过新分支）
+
+**风险提示**：
+- 强制推送会重写历史，需确保所有协作者重新克隆
+- 推送前必须验证工作区完全干净（`git grep` 检查）
+
+#### 2. 历史重写策略（谨慎使用）
+适用于：无干净备份，需要从历史中彻底删除
+
 ```bash
 # 1. 从历史记录中彻底删除
 git filter-branch --force --index-filter \
@@ -105,6 +139,25 @@ git push origin --force --all
 
 # 3. 通知协作者重新克隆
 ```
+
+**风险**：
+- 可能导致工作区文件丢失
+- 操作复杂，容易出错
+- 重写历史后难以恢复
+
+**最佳实践**：
+- 优先使用"干净分支策略"
+- 操作前备份当前工作区
+- 使用 `git grep` 验证清理效果
+- 保留清理脚本（如 clean_tokens.py）用于未来预防
+
+---
+
+**案例**：2026-03-14 GitHub Push Protection 拦截
+- **问题**：HISTORY.md、MEMORY.md 等文件包含 ghp_ token
+- **策略**：采用干净分支策略（从"全面发展01"分支恢复）
+- **结果**：成功创建 clean-branch-20260314 并强制推送，历史干净
+- **验证**：`git grep` 仅发现安全文件（clean_tokens.py、security-best-practices.md）
 
 ## 来源验证原则
 

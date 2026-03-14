@@ -109,6 +109,84 @@ set <varname>
 - **PostgreSQL**：`D:\PostgreSQL\16\data\pg_log\`
 - **Paperclip**：项目根目录 `logs/` 或控制台输出
 
+## Git 分支管理与历史重写
+
+### 强制推送风险
+- **警告**：`git push -f` 会重写远程历史，影响所有协作者
+- **适用场景**：
+  - 清理敏感信息（token、密码）
+  - 修正错误的提交历史
+  - 重构提交结构
+- **不适用**：多人协作的共享分支（如 main/master）
+
+### 干净分支策略（推荐）
+适用于：有干净备份，或需要安全地替换历史
+
+```bash
+# 1. 确保工作区干净（无敏感信息）
+git status
+git grep -i "token\|password\|key"
+
+# 2. 从已知干净分支恢复文件（如有）
+git checkout <clean-branch> -- <file>
+
+# 3. 创建新分支
+git checkout -b clean-branch-<date>
+
+# 4. 推送到远程
+git push -u origin clean-branch-<date>
+
+# 5. 强制推送到目标分支（替换历史）
+git push -f origin clean-branch-<date>:main
+```
+
+**验证步骤**：
+```bash
+# 检查远程分支
+git ls-remote origin main
+
+# 验证历史中无残留
+git grep -i "ghp_"
+```
+
+**通知协作者**：
+- 所有人必须重新克隆：`git clone <repo>`
+- 或重置本地分支：`git fetch origin && git reset --hard origin/main`
+
+### 历史重写策略（谨慎）
+适用于：无干净备份，必须从历史中彻底删除
+
+```bash
+# 1. 备份当前分支
+git branch backup-before-filter
+
+# 2. 使用 filter-branch 删除文件
+git filter-branch --force --index-filter \
+  'git rm --cached --ignore-unmatch <file>' \
+  --prune-empty --tag-name-filter cat -- --all
+
+# 3. 强制推送
+git push origin --force --all
+```
+
+**风险**：
+- 工作区文件可能丢失
+- 操作复杂，容易出错
+- 重写后难以恢复
+
+### 最佳实践
+- **优先使用干净分支策略**，避免 filter-branch
+- 操作前备份当前分支
+- 使用 `git grep` 验证清理效果
+- 保留清理脚本（如 clean_tokens.py）
+- 强制推送后通知所有协作者
+
+**案例**：2026-03-14 GitHub Push Protection 拦截
+- 使用干净分支策略成功清理 token 历史
+- 从"全面发展01"分支恢复文件
+- 创建 clean-branch-20260314 并强制推送到 main
+- 验证：`git grep` 仅发现安全文件
+
 ---
 
-*关键教训：Windows 环境需特别注意文件锁、PATH 配置、服务管理；所有配置变更后必须验证生效；卸载软件要彻底（服务+文件+环境变量）。*
+*关键教训：Windows 环境需特别注意文件锁、PATH 配置、服务管理；所有配置变更后必须验证生效；卸载软件要彻底（服务+文件+环境变量）；Git 强制推送需谨慎，优先使用干净分支策略。*
