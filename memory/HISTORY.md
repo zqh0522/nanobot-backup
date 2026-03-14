@@ -76,3 +76,7 @@
 
 [2026-03-13 21:07-21:28] 用户强调子agent输出格式需与助手一致（简洁markdown）。澄清nanobot安装来源：实际从PyPI官网安装（0.1.4.post4），workspace git仓库仅用于备份配置。用户批评助手前期草率下结论，要求做事严谨。确认Telegram需下载客户端但国内无法访问，建议转用钉钉/飞书。
 
+[2026-03-14 01:55] 紧急处理GitHub Push Protection拦截。检测到历史记录中仍有token泄露（HISTORY.md, MEMORY.md, reports/, sessions/）。采用干净分支策略：删除泄露文件，从"全面发展01"（5575230）干净分支恢复文件。文件恢复成功，工作区干净。下一步：重写历史并强制推送。
+
+[2026-03-14 02:33-04:05] Performed two self-improving heartbeat checks. First run created missing heartbeat-state.md, updated INDEX.md to include a-share-quantitative-trading.md domain, and detected recent changes in learning-adaptation.md (expanded from ~220 to 533 lines) and memory.md. Second run confirmed the INDEX.md update and verified 7 domain files totaling 1442 lines. System status: HEARTBEAT_OK with all core files present and organized.
+

@@ -14,14 +14,15 @@
 
 | 领域文件 | 主题 | 适用场景 | 行数 |
 |---------|------|---------|------|
-| `system-administration.md` | 系统运维与配置 | GitHub CLI、服务管理、Windows 兼容性 | ~150 |
-| `tool-integration.md` | 工具集成与技能管理 | 技能安装、agent-browser、akshare、平台限制 | ~180 |
-| `problem-solving.md` | 问题解决与调试 | 故障排查、网络问题、权限问题 | ~220 |
-| `security-best-practices.md` | 安全与最佳实践 | 敏感信息、风险评估、备份策略 | ~190 |
-| `communication-collaboration.md` | 沟通与协作规范 | 输出格式、用户偏好、严谨性要求 | ~140 |
-| `learning-adaptation.md` | 学习与适应策略 | 知识提取、模式识别、持续改进 | ~220 |
+| `system-administration.md` | 系统运维与配置 | GitHub CLI、服务管理、Windows 兼容性 | 114 |
+| `tool-integration.md` | 工具集成与技能管理 | 技能安装、agent-browser、akshare、平台限制 | 152 |
+| `problem-solving.md` | 问题解决与调试 | 故障排查、网络问题、权限问题 | 197 |
+| `security-best-practices.md` | 安全与最佳实践 | 敏感信息、风险评估、备份策略 | 182 |
+| `communication-collaboration.md` | 沟通与协作规范 | 输出格式、用户偏好、严谨性要求 | 165 |
+| `a-share-quantitative-trading.md` | A股量化交易系统 | 股票数据分析、量化策略、OpenClaw架构 | 99 |
+| `learning-adaptation.md` | 学习与适应策略 | 知识提取、模式识别、持续改进 | 533 |
 
-**总计**：6 个领域，约 1100 行结构化知识
+**总计**：7 个领域，约 1442 行结构化知识
 
 ## 📁 项目经验（projects/）
 
@@ -68,9 +69,9 @@ grep -i "X" self-improving/projects/*.md
 
 ## 📊 知识统计
 
-- **领域覆盖**：6 个核心领域
+- **领域覆盖**：7 个核心领域
 - **项目案例**：1 个完整项目
-- **总知识量**：~4000 行 markdown
+- **总知识量**：~1800 行 markdown
 - **历史记录**：200+ 条交互事件
 
 ## 🔄 维护流程
